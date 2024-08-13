@@ -1,4 +1,3 @@
-use csv::WriterBuilder;
 use std::{env, error::Error, fs::File, process};
 
 fn main() {
@@ -121,7 +120,9 @@ fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
 
     // Write the modified records back to the same file
     let file = File::create(absolute_path)?;
-    let mut wtr = WriterBuilder::new().has_headers(true).from_writer(file);
+    let mut wtr = csv::WriterBuilder::new()
+        .has_headers(true)
+        .from_writer(file);
 
     // Write the headers
     wtr.write_record(&headers)?;
