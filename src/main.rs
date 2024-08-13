@@ -70,12 +70,12 @@ fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     // Read headers
     let headers = parser.headers()?.clone();
 
+    // Get the index of the user-provided header
     let index = get_index_of_header(&headers, header);
     if index.is_none() {
         return Err(From::from(format!("Missing {} header", header)));
     }
     let header_index = index.unwrap();
-    println!("index of column: {:?}", header_index);
 
     // Iterate over each record, building a vector
     for record in parser.records() {
