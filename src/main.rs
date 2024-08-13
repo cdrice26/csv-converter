@@ -173,7 +173,9 @@ fn run(
         .from_writer(file);
 
     // Write the headers
-    let new_headers = modify_record(&headers, header_index, |f: String| f);
+    let new_headers = modify_record(&headers, header_index, |f: String| {
+        f.replace(from_unit, to_unit)
+    });
     wtr.write_record(&new_headers)?;
 
     // Write the modified records
