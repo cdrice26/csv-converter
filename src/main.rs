@@ -62,6 +62,37 @@ fn get_index_of_header(headers: &csv::StringRecord, header: &str) -> Option<usiz
     headers.iter().position(|h| h == header)
 }
 
+/// Modify the given column in the given vector of records, return a new vector with the modified column
+fn modify_column(
+    header_index: usize,
+    records: &mut Vec<csv::StringRecord>,
+) -> Vec<csv::StringRecord> {
+    records
+        .into_iter()
+        .map(|record| {
+            let mut new_record = record.clone(); // Clone the original record
+            if let Some(_) = new_record.get(header_index) {
+                // Replace the field with the modified value
+                new_record = new_record
+                    .iter()
+                    .enumerate()
+                    .map(|(i, f)| {
+                        if i == header_index {
+                            match f.parse::<f64>() {
+                                Ok(f) => (f + 1.0).to_string(),
+                                Err(_) => "ERROR".to_string(),
+                            }
+                        } else {
+                            f.to_string()
+                        }
+                    })
+                    .collect::<csv::StringRecord>();
+            }
+            new_record // Return the modified record
+        })
+        .collect()
+}
+
 /// Run the program
 fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     let mut parser = csv::Reader::from_path(absolute_path).unwrap();
@@ -86,30 +117,7 @@ fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     }
 
     // Create a new vector for modified records
-    let modified_records: Vec<csv::StringRecord> = records
-        .into_iter()
-        .map(|record| {
-            let mut new_record = record.clone(); // Clone the original record
-            if let Some(_) = new_record.get(header_index) {
-                // Replace the field with the modified value
-                new_record = new_record
-                    .iter()
-                    .enumerate()
-                    .map(|(i, f)| {
-                        if i == header_index {
-                            match f.parse::<f64>() {
-                                Ok(f) => (f + 1.0).to_string(),
-                                Err(_) => "ERROR".to_string(),
-                            }
-                        } else {
-                            f.to_string()
-                        }
-                    })
-                    .collect::<csv::StringRecord>();
-            }
-            new_record // Return the modified record
-        })
-        .collect();
+    let modified_records: Vec<csv::StringRecord> = modify_column(header_index, &mut records);
 
     // Write the modified records back to the same file
     let file = File::create(absolute_path)?;
