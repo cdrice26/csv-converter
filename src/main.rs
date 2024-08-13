@@ -93,7 +93,7 @@ fn modify_column(
         .collect()
 }
 
-/// Run the program
+/// Edit the given column in the given csv file
 fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     let mut parser = csv::Reader::from_path(absolute_path).unwrap();
     let mut records: Vec<csv::StringRecord> = Vec::new();
