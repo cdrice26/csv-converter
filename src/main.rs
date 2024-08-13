@@ -9,6 +9,7 @@ fn main() {
             process::exit(1);
         }
     };
+
     let absolute_path = match get_file_path(&raw_path) {
         Ok(absolute_path) => absolute_path,
         Err(e) => {
@@ -16,9 +17,16 @@ fn main() {
             process::exit(1);
         }
     };
-    println!("{}", absolute_path);
 
-    if let Err(e) = run(&absolute_path) {
+    let header = match get_arg(2) {
+        Ok(header) => header,
+        Err(e) => {
+            println!("Error getting header: {}", e);
+            process::exit(1);
+        }
+    };
+
+    if let Err(e) = run(&absolute_path, &header) {
         println!("Application error: {}", e);
         process::exit(1);
     }
@@ -49,8 +57,21 @@ fn get_arg(idx: usize) -> Result<String, Box<dyn Error>> {
     }
 }
 
-fn run(absolute_path: &str) -> Result<(), Box<dyn Error>> {
+fn get_index_of_header(headers: &csv::StringRecord, header: &str) -> Option<usize> {
+    headers.iter().position(|h| h == header)
+}
+
+fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     let mut parser = csv::Reader::from_path(absolute_path).unwrap();
+
+    // Read headers
+    let headers = parser.headers()?;
+    let index = get_index_of_header(headers, header);
+    if index.is_none() {
+        return Err(From::from(format!("Missing {} header", header)));
+    }
+    let header_index = index.unwrap();
+    println!("index of column: {:?}", header_index);
 
     // Iterate over each record
     for record in parser.records() {
