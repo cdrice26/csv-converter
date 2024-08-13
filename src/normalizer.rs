@@ -45,9 +45,6 @@ pub fn normalize(input_unit: &str) -> Result<&str, Box<dyn Error>> {
         // Mass units
         "grams" | "gram" | "g" => return Ok("g"),
         "kilograms" | "kilogram" | "kg" => return Ok("kg"),
-        "milligrams" | "milligram" | "mg" => return Ok("mg"),
-        "micrograms" | "microgram" | "ug" => return Ok("ug"),
-        "nanograms" | "nanogram" | "ng" => return Ok("ng"),
         "metric tons" | "metric ton" => return Ok("t metric"),
         "tons" | "ton" | "tonne" | "t" => return Ok("t"),
         "ounces" | "ounce" | "oz" => return Ok("oz"),
@@ -63,16 +60,16 @@ pub fn normalize(input_unit: &str) -> Result<&str, Box<dyn Error>> {
         "milliseconds" | "millisecond" | "ms" => return Ok("ms"),
         "microseconds" | "microsecond" | "us" => return Ok("us"),
         "nanoseconds" | "nanosecond" | "ns" => return Ok("ns"),
-        "hours" | "hour" | "h" => return Ok("h"),
-        "minutes" | "minute" | "min" => return Ok("min"),
+        "hours" | "hour" | "h" | "hr" | "hrs" => return Ok("h"),
+        "minutes" | "minute" | "min" | "mins" => return Ok("min"),
         "days" | "day" | "d" => return Ok("d"),
-        "weeks" | "week" | "w" => return Ok("w"),
+        "weeks" | "week" | "w" | "wks" | "wk" => return Ok("w"),
         "months" | "month" | "mo" => return Ok("mo"),
-        "years" | "year" | "y" => return Ok("y"),
+        "years" | "year" | "y" | "yr" | "yrs" => return Ok("y"),
 
         // Speed units
-        "meters per second" | "meter per second" | "m/s" => return Ok("m/s"),
-        "kilometers per hour" | "kilometer per hour" | "km/h" => return Ok("km/h"),
+        "meters per second" | "meter per second" | "m/s" | "mps" => return Ok("m/s"),
+        "kilometers per hour" | "kilometer per hour" | "km/h" | "kph" => return Ok("km/h"),
         "miles per hour" | "mile per hour" | "mph" => return Ok("mph"),
 
         // Angle units
