@@ -1,3 +1,6 @@
+mod converter;
+mod normalizer;
+
 use std::{env, error::Error, fs::File, process};
 
 fn main() {
@@ -25,7 +28,23 @@ fn main() {
         }
     };
 
-    if let Err(e) = run(&absolute_path, &header) {
+    let from_unit = match get_arg(3) {
+        Ok(unit) => unit,
+        Err(e) => {
+            println!("Error getting unit: {}", e);
+            process::exit(1);
+        }
+    };
+
+    let to_unit = match get_arg(4) {
+        Ok(unit) => unit,
+        Err(e) => {
+            println!("Error getting unit: {}", e);
+            process::exit(1);
+        }
+    };
+
+    if let Err(e) = run(&absolute_path, &header, &from_unit, &to_unit) {
         println!("Application error: {}", e);
         process::exit(1);
     }
@@ -62,10 +81,14 @@ fn get_index_of_header(headers: &csv::StringRecord, header: &str) -> Option<usiz
 }
 
 /// Modify the given column in the given vector of records, return a new vector with the modified column
-fn modify_column(
+fn modify_column<F>(
     header_index: usize,
-    records: &mut Vec<csv::StringRecord>,
-) -> Vec<csv::StringRecord> {
+    records: &Vec<csv::StringRecord>,
+    modifier: F,
+) -> Vec<csv::StringRecord>
+where
+    F: Fn(f64) -> f64,
+{
     records
         .into_iter()
         .map(|record| {
@@ -78,7 +101,7 @@ fn modify_column(
                     .map(|(i, f)| {
                         if i == header_index {
                             match f.parse::<f64>() {
-                                Ok(f) => (f + 1.0).to_string(),
+                                Ok(f) => modifier(f).to_string(),
                                 Err(_) => "ERROR".to_string(),
                             }
                         } else {
@@ -93,7 +116,12 @@ fn modify_column(
 }
 
 /// Edit the given column in the given csv file
-fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
+fn run(
+    absolute_path: &str,
+    header: &str,
+    from_unit: &str,
+    to_unit: &str,
+) -> Result<(), Box<dyn Error>> {
     let mut parser = csv::Reader::from_path(absolute_path).unwrap();
     let mut records: Vec<csv::StringRecord> = Vec::new();
 
@@ -116,7 +144,15 @@ fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     }
 
     // Create a new vector for modified records
-    let modified_records: Vec<csv::StringRecord> = modify_column(header_index, &mut records);
+    let modified_records: Vec<csv::StringRecord> = modify_column(header_index, &records, |f| {
+        match converter::convert(f, from_unit, to_unit) {
+            Ok(f) => f,
+            Err(e) => {
+                println!("Error converting: {}", e);
+                f
+            }
+        }
+    });
 
     // Write the modified records back to the same file
     let file = File::create(absolute_path)?;
