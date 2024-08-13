@@ -1,7 +1,7 @@
-use std::{env, error::Error, process};
+use csv::WriterBuilder;
+use std::{env, error::Error, fs::File, process};
 
 fn main() {
-    // Create a CSV parser that takes file path from the first command-line argument
     let raw_path = match get_arg(1) {
         Ok(path) => path,
         Err(e) => {
@@ -57,28 +57,74 @@ fn get_arg(idx: usize) -> Result<String, Box<dyn Error>> {
     }
 }
 
+/// Returns the index of the given header in the given csv::StringRecord.
 fn get_index_of_header(headers: &csv::StringRecord, header: &str) -> Option<usize> {
     headers.iter().position(|h| h == header)
 }
 
+/// Run the program
 fn run(absolute_path: &str, header: &str) -> Result<(), Box<dyn Error>> {
     let mut parser = csv::Reader::from_path(absolute_path).unwrap();
+    let mut records: Vec<csv::StringRecord> = Vec::new();
 
     // Read headers
-    let headers = parser.headers()?;
-    let index = get_index_of_header(headers, header);
+    let headers = parser.headers()?.clone();
+
+    let index = get_index_of_header(&headers, header);
     if index.is_none() {
         return Err(From::from(format!("Missing {} header", header)));
     }
     let header_index = index.unwrap();
     println!("index of column: {:?}", header_index);
 
-    // Iterate over each record
+    // Iterate over each record, building a vector
     for record in parser.records() {
         match record {
-            Ok(record) => println!("{:?}", record),
+            Ok(record) => records.push(record),
             Err(e) => return Err(From::from(e)),
         }
     }
+
+    // Create a new vector for modified records
+    let modified_records: Vec<csv::StringRecord> = records
+        .into_iter()
+        .map(|record| {
+            let mut new_record = record.clone(); // Clone the original record
+            if let Some(_) = new_record.get(header_index) {
+                // Replace the field with the modified value
+                new_record = new_record
+                    .iter()
+                    .enumerate()
+                    .map(|(i, f)| {
+                        if i == header_index {
+                            match f.parse::<f64>() {
+                                Ok(f) => (f + 1.0).to_string(),
+                                Err(_) => "ERROR".to_string(),
+                            }
+                        } else {
+                            f.to_string()
+                        }
+                    })
+                    .collect::<csv::StringRecord>();
+            }
+            new_record // Return the modified record
+        })
+        .collect();
+
+    // Write the modified records back to the same file
+    let file = File::create(absolute_path)?;
+    let mut wtr = WriterBuilder::new().has_headers(true).from_writer(file);
+
+    // Write the headers
+    wtr.write_record(&headers)?;
+
+    // Write the modified records
+    for record in modified_records {
+        wtr.write_record(&record)?;
+    }
+
+    // Flush the writer to ensure all data is written
+    wtr.flush()?;
+
     Ok(())
 }
