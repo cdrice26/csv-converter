@@ -80,6 +80,38 @@ fn get_index_of_header(headers: &csv::StringRecord, header: &str) -> Option<usiz
     headers.iter().position(|h| h == header)
 }
 
+/// Modify single column in a csv::StringRecord
+fn modify_record<F, T, R>(
+    record: &csv::StringRecord,
+    header_index: usize,
+    modifier: F,
+) -> csv::StringRecord
+where
+    F: Fn(T) -> R,
+    T: std::str::FromStr + std::fmt::Display,
+    R: std::fmt::Display,
+{
+    let mut new_record = record.clone(); // Clone the original record
+    if let Some(_) = new_record.get(header_index) {
+        // Replace the field with the modified value
+        let mut fields: Vec<String> = Vec::with_capacity(new_record.len());
+
+        for (i, f) in new_record.iter().enumerate() {
+            if i == header_index {
+                match f.parse::<T>() {
+                    Ok(value) => fields.push(modifier(value).to_string()),
+                    Err(_) => fields.push("ERROR".to_string()),
+                }
+            } else {
+                fields.push(f.to_string());
+            }
+        }
+
+        new_record = csv::StringRecord::from(fields);
+    }
+    new_record
+}
+
 /// Modify the given column in the given vector of records, return a new vector with the modified column
 fn modify_column<F>(
     header_index: usize,
@@ -91,27 +123,7 @@ where
 {
     records
         .into_iter()
-        .map(|record| {
-            let mut new_record = record.clone(); // Clone the original record
-            if let Some(_) = new_record.get(header_index) {
-                // Replace the field with the modified value
-                new_record = new_record
-                    .iter()
-                    .enumerate()
-                    .map(|(i, f)| {
-                        if i == header_index {
-                            match f.parse::<f64>() {
-                                Ok(f) => modifier(f).to_string(),
-                                Err(_) => "ERROR".to_string(),
-                            }
-                        } else {
-                            f.to_string()
-                        }
-                    })
-                    .collect::<csv::StringRecord>();
-            }
-            new_record // Return the modified record
-        })
+        .map(|record| modify_record(record, header_index, &modifier))
         .collect()
 }
 
@@ -161,7 +173,8 @@ fn run(
         .from_writer(file);
 
     // Write the headers
-    wtr.write_record(&headers)?;
+    let new_headers = modify_record(&headers, header_index, |f: String| f);
+    wtr.write_record(&new_headers)?;
 
     // Write the modified records
     for record in modified_records {
