@@ -50,9 +50,12 @@ pub fn convert(val: f64, from: &str, to: &str) -> Result<f64, Box<dyn Error>> {
         "ft2" => area::ft2_to_mm2(val),
         "m2" => area::m2_to_mm2(val),
         "mm2" => val,
+        "ac" => area::ac_to_mm2(val),
+        "ha" => area::ha_to_mm2(val),
 
         // Mass units
         "t" => mass::t_to_g(val),
+        "mg" => mass::mg_to_g(val),
         "kg" => mass::kg_to_g(val),
         "g" => val,
         "lb" => mass::lb_to_g(val / 16.0),
@@ -127,11 +130,14 @@ pub fn convert(val: f64, from: &str, to: &str) -> Result<f64, Box<dyn Error>> {
         "ft2" => area::mm2_to_ft2(converted_to_std),
         "m2" => area::mm2_to_m2(converted_to_std),
         "mm2" => converted_to_std,
+        "ac" => area::mm2_to_ac(converted_to_std),
+        "ha" => area::mm2_to_ha(converted_to_std),
 
         // Mass units
         "t" => mass::g_to_t(converted_to_std),
         "kg" => mass::g_to_kg(converted_to_std),
         "g" => converted_to_std,
+        "mg" => mass::g_to_mg(converted_to_std),
         "lb" => mass::g_to_lb(converted_to_std),
         "oz" => mass::g_to_oz(converted_to_std),
         "t metric" => mass::g_to_t_metric(converted_to_std),
