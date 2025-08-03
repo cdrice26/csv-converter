@@ -5,3 +5,11 @@ edition = "2021"
 
 [dependencies]
 csv = "1.1"
+
+[dev-dependencies]
+assert_cmd = "2.0.17"
+tempfile = "3.20.0"
+
+[[bin]]
+name = "csvc"
+path = "src/main.rs"
