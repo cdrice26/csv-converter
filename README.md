@@ -1,5 +1,5 @@
 # CSV Converter
-This is a small Rust program that converts the units of columns in a CSV file. So if, for instance, you download some CSV data where one column is in inches but you really want it in feet, this tool is here to help!
+This is a small Rust program that converts the units of columns in a CSV file. So if, for instance, you download some CSV data where one column is in inches but you really want it in feet, this tool is here to help! Just be aware that as the conversion factors are hardcoded, while I think they should be correct, you may want to double-check your output, at least for now.
 
 ## Installation and Development
 Once you've cloned the repo, it's just a standard cargo project, so go ahead and use standard commands like `cargo run`, `cargo build`, and `cargo test` (only used for an end-to-end test as conversion functions are self-explanatory).
