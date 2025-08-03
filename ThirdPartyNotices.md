@@ -1,64 +1,18 @@
-<html>
+# Third Party Licenses
+This page lists the licenses of the projects used in csv-converter.
 
-<head>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #333;
-                color: white;
-            }
-            a {
-                color: skyblue;
-            }
-        }
-        .container {
-            font-family: sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .intro {
-            text-align: center;
-        }
-        .licenses-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .license-used-by {
-            margin-top: -10px;
-        }
-        .license-text {
-            max-height: 200px;
-            overflow-y: scroll;
-            white-space: pre-wrap;
-        }
-    </style>
-</head>
+## Overview of licenses:
+- [MIT License](#MIT) (7)
+- [Apache License 2.0](#Apache-2.0) (3)
 
-<body>
-    <main class="container">
-        <div class="intro">
-            <h1>Third Party Licenses</h1>
-            <p>This page lists the licenses of the projects used in cargo-about.</p>
-        </div>
-    
-        <h2>Overview of licenses:</h2>
-        <ul class="licenses-overview">
-            <li><a href="#MIT">MIT License</a> (7)</li>
-            <li><a href="#Apache-2.0">Apache License 2.0</a> (3)</li>
-        </ul>
-
-        <h2>All license text:</h2>
-        <ul class="licenses-list">
-            <li class="license">
-                <h3 id="Apache-2.0">Apache License 2.0</h3>
-                <h4>Used by:</h4>
-                <ul class="license-used-by">
-                    <li><a href=" https://github.com/dtolnay/itoa ">itoa 1.0.11</a></li>
-                    <li><a href=" https://github.com/dtolnay/ryu ">ryu 1.0.18</a></li>
-                    <li><a href=" https://github.com/serde-rs/serde ">serde 1.0.207</a></li>
-                </ul>
-                <pre class="license-text">                              Apache License
+## All license text:
+### Apache License 2.0 <a name="Apache-2.0"></a>
+#### Used by:
+- <a href=" https://github.com/dtolnay/itoa ">itoa 1.0.11</a>
+- <a href=" https://github.com/dtolnay/ryu ">ryu 1.0.18</a>
+- <a href=" https://github.com/serde-rs/serde ">serde 1.0.207</a>
+```
+                                  Apache License
                         Version 2.0, January 2004
                      http://www.apache.org/licenses/
 
@@ -66,38 +20,38 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
 
-   &quot;License&quot; shall mean the terms and conditions for use, reproduction,
+   "License" shall mean the terms and conditions for use, reproduction,
    and distribution as defined by Sections 1 through 9 of this document.
 
-   &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+   "Licensor" shall mean the copyright owner or entity authorized by
    the copyright owner that is granting the License.
 
-   &quot;Legal Entity&quot; shall mean the union of the acting entity and all
+   "Legal Entity" shall mean the union of the acting entity and all
    other entities that control, are controlled by, or are under common
    control with that entity. For the purposes of this definition,
-   &quot;control&quot; means (i) the power, direct or indirect, to cause the
+   "control" means (i) the power, direct or indirect, to cause the
    direction or management of such entity, whether by contract or
    otherwise, or (ii) ownership of fifty percent (50%) or more of the
    outstanding shares, or (iii) beneficial ownership of such entity.
 
-   &quot;You&quot; (or &quot;Your&quot;) shall mean an individual or Legal Entity
+   "You" (or "Your") shall mean an individual or Legal Entity
    exercising permissions granted by this License.
 
-   &quot;Source&quot; form shall mean the preferred form for making modifications,
+   "Source" form shall mean the preferred form for making modifications,
    including but not limited to software source code, documentation
    source, and configuration files.
 
-   &quot;Object&quot; form shall mean any form resulting from mechanical
+   "Object" form shall mean any form resulting from mechanical
    transformation or translation of a Source form, including but
    not limited to compiled object code, generated documentation,
    and conversions to other media types.
 
-   &quot;Work&quot; shall mean the work of authorship, whether in Source or
+   "Work" shall mean the work of authorship, whether in Source or
    Object form, made available under the License, as indicated by a
    copyright notice that is included in or attached to the work
    (an example is provided in the Appendix below).
 
-   &quot;Derivative Works&quot; shall mean any work, whether in Source or Object
+   "Derivative Works" shall mean any work, whether in Source or Object
    form, that is based on (or derived from) the Work and for which the
    editorial revisions, annotations, elaborations, or other modifications
    represent, as a whole, an original work of authorship. For the purposes
@@ -105,21 +59,21 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
    separable from, or merely link (or bind by name) to the interfaces of,
    the Work and Derivative Works thereof.
 
-   &quot;Contribution&quot; shall mean any work of authorship, including
+   "Contribution" shall mean any work of authorship, including
    the original version of the Work and any modifications or additions
    to that Work or Derivative Works thereof, that is intentionally
    submitted to Licensor for inclusion in the Work by the copyright owner
    or by an individual or Legal Entity authorized to submit on behalf of
-   the copyright owner. For the purposes of this definition, &quot;submitted&quot;
+   the copyright owner. For the purposes of this definition, "submitted"
    means any form of electronic, verbal, or written communication sent
    to the Licensor or its representatives, including but not limited to
    communication on electronic mailing lists, source code control systems,
    and issue tracking systems that are managed by, or on behalf of, the
    Licensor for the purpose of discussing and improving the Work, but
    excluding communication that is conspicuously marked or otherwise
-   designated in writing by the copyright owner as &quot;Not a Contribution.&quot;
+   designated in writing by the copyright owner as "Not a Contribution."
 
-   &quot;Contributor&quot; shall mean Licensor and any individual or Legal Entity
+   "Contributor" shall mean Licensor and any individual or Legal Entity
    on behalf of whom a Contribution has been received by Licensor and
    subsequently incorporated within the Work.
 
@@ -163,7 +117,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
        excluding those notices that do not pertain to any part of
        the Derivative Works; and
 
-   (d) If the Work includes a &quot;NOTICE&quot; text file as part of its
+   (d) If the Work includes a "NOTICE" text file as part of its
        distribution, then any Derivative Works that You distribute must
        include a readable copy of the attribution notices contained
        within such NOTICE file, excluding those notices that do not
@@ -202,7 +156,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 7. Disclaimer of Warranty. Unless required by applicable law or
    agreed to in writing, Licensor provides the Work (and each
-   Contributor provides its Contributions) on an &quot;AS IS&quot; BASIS,
+   Contributor provides its Contributions) on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
    implied, including, without limitation, any warranties or conditions
    of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
@@ -234,22 +188,20 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
    of your accepting any such warranty or additional liability.
 
 END OF TERMS AND CONDITIONS
-</pre>
-            </li>
-            <li class="license">
-                <h3 id="MIT">MIT License</h3>
-                <h4>Used by:</h4>
-                <ul class="license-used-by">
-                    <li><a href=" https://github.com/BurntSushi/rust-csv ">csv-core 0.1.11</a></li>
-                    <li><a href=" https://github.com/BurntSushi/rust-csv ">csv 1.3.0</a></li>
-                    <li><a href=" https://github.com/BurntSushi/memchr ">memchr 2.7.4</a></li>
-                </ul>
-                <pre class="license-text">The MIT License (MIT)
+
+```
+### MIT License <a name="MIT"></a>
+#### Used by:
+- <a href=" https://github.com/BurntSushi/rust-csv ">csv-core 0.1.11</a>
+- <a href=" https://github.com/BurntSushi/rust-csv ">csv 1.3.0</a>
+- <a href=" https://github.com/BurntSushi/memchr ">memchr 2.7.4</a>
+```
+    The MIT License (MIT)
 
 Copyright (c) 2015 Andrew Gallant
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the &quot;Software&quot;), to deal
+of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
@@ -258,46 +210,37 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-</pre>
-            </li>
-            <li class="license">
-                <h3 id="MIT">MIT License</h3>
-                <h4>Used by:</h4>
-                <ul class="license-used-by">
-                    <li><a href=" https://crates.io/crates/csv-converter ">csv-converter 0.1.0</a></li>
-                </ul>
-                <pre class="license-text">The MIT License (MIT)
+
+```
+### MIT License <a name="MIT"></a>
+#### Used by:
+- <a href=" https://crates.io/crates/csv-converter ">csv-converter 0.1.0</a>
+```
+    The MIT License (MIT)
 Copyright © 2025 Caleb Rice
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</pre>
-            </li>
-            <li class="license">
-                <h3 id="MIT">MIT License</h3>
-                <h4>Used by:</h4>
-                <ul class="license-used-by">
-                    <li><a href=" https://github.com/BurntSushi/rust-csv ">csv-core 0.1.11</a></li>
-                    <li><a href=" https://github.com/BurntSushi/rust-csv ">csv 1.3.0</a></li>
-                    <li><a href=" https://github.com/BurntSushi/memchr ">memchr 2.7.4</a></li>
-                </ul>
-                <pre class="license-text">This project is dual-licensed under the Unlicense and MIT licenses.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+### MIT License <a name="MIT"></a>
+#### Used by:
+- <a href=" https://github.com/BurntSushi/rust-csv ">csv-core 0.1.11</a>
+- <a href=" https://github.com/BurntSushi/rust-csv ">csv 1.3.0</a>
+- <a href=" https://github.com/BurntSushi/memchr ">memchr 2.7.4</a>
+```
+    This project is dual-licensed under the Unlicense and MIT licenses.
 
 You may use this code under the terms of either license.
-</pre>
-            </li>
-        </ul>
-    </main>
-</body>
 
-</html>
+```
 
