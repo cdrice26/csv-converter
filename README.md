@@ -16,4 +16,4 @@ csvc [INPUTFILE] [HEADERNAME] [CURRENTUNIT] [NEWUNIT]
 ```
 
 ## License
-CSV Converter is licensed under the [MIT License](LICENSE).
+CSV Converter is licensed under the [MIT License](LICENSE). Dependencies use their own licenses, see [third party notices](ThirdPartyNotices.md).
